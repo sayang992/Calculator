@@ -105,6 +105,13 @@ class MainActivity : AppCompatActivity() {
             }else if(isOperator(cmp))
             {
                 isLastOperator = false
+                isLastNum = true
+                val myString = myInput?.text.toString()
+                for(i in myString.length-2 downTo 0)
+                {
+                    if(myString[i]=='.') isNotDot = true
+                    if(isOperator(myString[i])) break
+                }
             }
         }
 
