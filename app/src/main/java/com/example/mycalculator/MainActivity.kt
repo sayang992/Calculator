@@ -62,19 +62,13 @@ class MainActivity : AppCompatActivity() {
         if(isScreenHasText() || isScreenHasNegative()) return
         if(myInput?.text?.isEmpty() == true) return
         isNotDot = false
-        if(isLastDot)
+        if(isLastDot || isLastOperator)
         {
-            myInput?.text = myInput?.text?.dropLast(1)
-            setBooleans(isLastNum = true, isLastDot = false, isLastOperator = false)
-            //Toast.makeText(this, "YO", Toast.LENGTH_LONG).show()
-        }
-        if(!isLastOperator)
-        {
-            setBooleans(isLastNum = false, isLastDot = false, isLastOperator = true)
-        }else
-        {
+            if(isLastDot) isLastDot = false
+            if(isLastOperator) isLastOperator = false
             myInput?.text = myInput?.text?.dropLast(1)
         }
+        setBooleans(isLastNum=false, isLastDot=false, isLastOperator=true)
         myInput?.append((view as Button).text)
     }
 
@@ -180,6 +174,8 @@ class MainActivity : AppCompatActivity() {
             {
                 isFirstDigitZero = true
             }
+            if(ansString.contains(".")) isNotDot = true
+            setBooleans(isLastNum=true, isLastDot = false, isLastOperator = false)
             myInput?.text = ansString
         }
     }
